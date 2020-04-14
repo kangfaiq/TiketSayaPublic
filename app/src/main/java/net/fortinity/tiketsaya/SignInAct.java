@@ -41,6 +41,10 @@ public class SignInAct extends AppCompatActivity {
         btn_sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //ubah state menjadi loading
+                btn_sign_in.setEnabled(false);
+                btn_sign_in.setText("Loading...");
+
                 final String username = xusername.getText().toString();
                 final String password = xpassword.getText().toString();
 
