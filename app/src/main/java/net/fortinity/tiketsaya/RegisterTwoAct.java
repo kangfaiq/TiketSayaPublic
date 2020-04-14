@@ -1,9 +1,5 @@
 package net.fortinity.tiketsaya;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,6 +12,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -26,8 +26,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
-public class RegisterTwoAct extends AppCompatActivity
-{
+public class RegisterTwoAct extends AppCompatActivity {
 
     LinearLayout btn_back;
     Button btn_continue, btn_add_photo;
@@ -45,8 +44,7 @@ public class RegisterTwoAct extends AppCompatActivity
     String username_key_new = "";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_two);
 
@@ -59,20 +57,16 @@ public class RegisterTwoAct extends AppCompatActivity
         bio = findViewById(R.id.bio);
         nama_lengkap = findViewById(R.id.nama_lengkap);
 
-        btn_add_photo.setOnClickListener(new View.OnClickListener()
-        {
+        btn_add_photo.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 findphoto();
             }
         });
 
-        btn_continue.setOnClickListener(new View.OnClickListener()
-        {
+        btn_continue.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 //ubah state menjadi loading
                 btn_continue.setEnabled(false);
                 btn_continue.setText("Loading...");
@@ -83,44 +77,35 @@ public class RegisterTwoAct extends AppCompatActivity
                 storage = FirebaseStorage.getInstance().getReference().child("PhotoUsers").child(username_key_new);
 
                 //validasi untuk file(apakah ada?)
-                if (photo_location != null)
-                {
+                if (photo_location != null) {
                     final StorageReference storageReference1 =
                             storage.child(System.currentTimeMillis() + "." +
                                     getFileExtension(photo_location));
                     storageReference1.putFile(photo_location)
-                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>()
-                            {
+                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
-                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot)
-                                {
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                                    storageReference1.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
-                                    {
+                                    storageReference1.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                         @Override
-                                        public void onSuccess(Uri uri)
-                                        {
+                                        public void onSuccess(Uri uri) {
                                             String uri_photo = uri.toString();
                                             reference.getRef().child("url_photo_profile").setValue(uri_photo);
                                             reference.getRef().child("nama_lengkap").setValue(nama_lengkap.getText().toString());
                                             reference.getRef().child("bio").setValue(bio.getText().toString());
                                         }
-                                    }).addOnCompleteListener(new OnCompleteListener<Uri>()
-                                    {
+                                    }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                                         @Override
-                                        public void onComplete(@NonNull Task<Uri> task)
-                                        {
+                                        public void onComplete(@NonNull Task<Uri> task) {
                                             //berpindah activity
                                             Intent gotosuccess = new Intent(RegisterTwoAct.this, SuccessRegisterAct.class);
                                             startActivity(gotosuccess);
                                         }
                                     });
                                 }
-                            }).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>()
-                    {
+                            }).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                         @Override
-                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task)
-                        {
+                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                             // berpindah activity
                             // Intent gotosuccess = new Intent(RegisterTwoAct.this, SuccessRegisterAct.class);
                             // startActivity(gotosuccess);
@@ -131,26 +116,22 @@ public class RegisterTwoAct extends AppCompatActivity
             }
         });
 
-        btn_back.setOnClickListener(new View.OnClickListener()
-        {
+        btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 onBackPressed();
             }
         });
 
     }
 
-    String getFileExtension(Uri uri)
-    {
+    String getFileExtension(Uri uri) {
         ContentResolver contentResolver = getContentResolver();
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
-    public void findphoto()
-    {
+    public void findphoto() {
         Intent pic = new Intent();
         pic.setType("image/*");
         pic.setAction(Intent.ACTION_GET_CONTENT);
@@ -158,20 +139,17 @@ public class RegisterTwoAct extends AppCompatActivity
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
-    {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == photo_max && resultCode == RESULT_OK && data !=null && data.getData() != null)
-        {
+        if (requestCode == photo_max && resultCode == RESULT_OK && data != null && data.getData() != null) {
             photo_location = data.getData();
             Picasso.with(this).load(photo_location).centerCrop().fit().into(pic_photo_register_user);
         }
 
     }
 
-    public void getUsernameLocal()
-    {
+    public void getUsernameLocal() {
         SharedPreferences sharedPreferences = getSharedPreferences(USERNAME_KEY, MODE_PRIVATE);
         username_key_new = sharedPreferences.getString(username_key, "");
     }

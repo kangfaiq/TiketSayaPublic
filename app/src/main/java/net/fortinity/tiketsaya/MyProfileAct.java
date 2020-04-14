@@ -26,7 +26,7 @@ import java.util.ArrayList;
 public class MyProfileAct extends AppCompatActivity {
 
     LinearLayout item_my_ticket;
-    Button btn_edit_profile;
+    Button btn_edit_profile, btn_back_home, btn_signout;
 
     TextView nama_lengkap, bio;
     ImageView photo_profile;
@@ -50,6 +50,8 @@ public class MyProfileAct extends AppCompatActivity {
 
         item_my_ticket = findViewById(R.id.item_my_ticket);
         btn_edit_profile = findViewById(R.id.btn_edit_profile);
+        btn_back_home = findViewById(R.id.btn_back_home);
+        btn_signout = findViewById(R.id.btn_signout);
 
         nama_lengkap = findViewById(R.id.nama_lengkap);
         bio = findViewById(R.id.bio);
@@ -101,6 +103,30 @@ public class MyProfileAct extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+
+        btn_back_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gotobackhome = new Intent(MyProfileAct.this, HomeAct.class);
+                startActivity(gotobackhome);
+            }
+        });
+
+        btn_signout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // menghapus isi / nilai / value dari username lokal
+                SharedPreferences sharedPreferences = getSharedPreferences(USERNAME_KEY, MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString(username_key, null);
+                editor.apply();
+
+                // berpindah activity
+                Intent gotologin = new Intent(MyProfileAct.this, SignInAct.class);
+                startActivity(gotologin);
+                finish();
             }
         });
     }

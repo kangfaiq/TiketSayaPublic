@@ -95,6 +95,7 @@
                         android:textSize="20sp" />
 
                     <EditText
+                        android:id="@+id/xnama_lengkap"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:background="@drawable/bg_input_edit"
@@ -123,6 +124,7 @@
                         android:textSize="20sp" />
 
                     <EditText
+                        android:id="@+id/xbio"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:background="@drawable/bg_input_edit"
@@ -151,9 +153,11 @@
                         android:textSize="20sp" />
 
                     <EditText
+                        android:id="@+id/xusername"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:background="@drawable/bg_input_edit"
+                        android:enabled="false"
                         android:fontFamily="@font/mmedium"
                         android:inputType="text"
                         android:lines="1"
@@ -179,6 +183,7 @@
                         android:textSize="20sp" />
 
                     <EditText
+                        android:id="@+id/xpassword"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:background="@drawable/bg_input_edit"
@@ -207,6 +212,7 @@
                         android:textSize="20sp" />
 
                     <EditText
+                        android:id="@+id/xemail_address"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:background="@drawable/bg_input_edit"
@@ -263,6 +269,7 @@
             </com.github.florent37.shapeofview.shapes.CircleView>
 
             <Button
+                android:id="@+id/btn_add_new_photo"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_marginTop="95dp"
