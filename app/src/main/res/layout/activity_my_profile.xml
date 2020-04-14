@@ -38,7 +38,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/photo_home_user"
+            android:id="@+id/photo_profile"
             android:layout_width="95dp"
             android:layout_height="95dp"
             android:src="@drawable/icon_nopic" />
@@ -46,12 +46,11 @@
     </com.github.florent37.shapeofview.shapes.CircleView>
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/nama_lengkap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/mmedium"
-        android:text="Faiq Nukha"
         android:textAlignment="center"
         android:textColor="#FFF"
         android:textSize="24sp"
@@ -60,18 +59,17 @@
         app:layout_constraintTop_toBottomOf="@+id/view3" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/bio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/mlight"
-        android:text="Rebahan"
         android:textAlignment="center"
         android:textColor="#FFF"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/nama_lengkap" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -89,7 +87,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5">
+        app:layout_constraintTop_toBottomOf="@+id/bio">
 
         <TextView
             android:layout_width="wrap_content"
@@ -115,123 +113,13 @@
             android:layout_marginBottom="16dp"
             android:background="#EDEDED" />
 
-        <LinearLayout
-            android:id="@+id/item_my_ticket"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/myticket_place"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:orientation="horizontal">
+            android:layout_height="180dp">
 
-            <ImageView
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-                android:src="@drawable/ic_ticket_buy" />
 
-            <LinearLayout
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="6dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/photo_spot_ticket"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/mregular"
-                    android:text="Menara Pisa"
-                    android:textColor="@color/blackPrimary"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:fontFamily="@font/mlight"
-                    android:text="Pisa City, Italy"
-                    android:textColor="@color/grayPrimary"
-                    android:textSize="12sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
-                    android:fontFamily="@font/mlight"
-                    android:text="2 Tickets"
-                    android:textColor="@color/bluePrimary"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-                android:src="@drawable/ic_ticket_buy" />
-
-            <LinearLayout
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="6dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/photo_spot_ticket"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/mregular"
-                    android:text="Torri"
-                    android:textColor="@color/blackPrimary"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:fontFamily="@font/mlight"
-                    android:text="Village, Jakarta"
-                    android:textColor="@color/grayPrimary"
-                    android:textSize="12sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
-                    android:fontFamily="@font/mlight"
-                    android:text="1 Tickets"
-                    android:textColor="@color/bluePrimary"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
-
-        </LinearLayout>
+        </androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>
 
@@ -250,7 +138,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_my_dashboard" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <Button
         android:id="@+id/btn_my_dashboard"
@@ -267,6 +155,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_edit_profile" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
