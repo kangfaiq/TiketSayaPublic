@@ -161,7 +161,13 @@ public class EditProfileAct extends AppCompatActivity {
             public void onClick(View v) {
                 findphoto();
             }
+        });
 
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
         });
 
     }

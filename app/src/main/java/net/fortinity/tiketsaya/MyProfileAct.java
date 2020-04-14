@@ -109,8 +109,7 @@ public class MyProfileAct extends AppCompatActivity {
         btn_back_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent gotobackhome = new Intent(MyProfileAct.this, HomeAct.class);
-                startActivity(gotobackhome);
+                onBackPressed();
             }
         });
 
