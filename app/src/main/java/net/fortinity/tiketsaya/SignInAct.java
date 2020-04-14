@@ -1,6 +1,7 @@
 package net.fortinity.tiketsaya;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +24,9 @@ public class SignInAct extends AppCompatActivity {
     Button btn_sign_in;
     EditText xusername, xpassword;
 
+    String USERNAME_KEY = "usernamekey";
+    String username_key = "";
+
     DatabaseReference reference;
 
     @Override
@@ -37,8 +41,8 @@ public class SignInAct extends AppCompatActivity {
         btn_sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String username = xusername.getText().toString();
-                String password = xpassword.getText().toString();
+                final String username = xusername.getText().toString();
+                final String password = xpassword.getText().toString();
 
                 reference = FirebaseDatabase.getInstance().getReference()
                         .child("Users").child(username);
@@ -46,11 +50,26 @@ public class SignInAct extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
-                            Toast.makeText(getApplicationContext(), "Username ada!", Toast.LENGTH_SHORT).show();
+                            // ambil data password dari firebase
+                            String passwordFromFirebase = dataSnapshot.child("password").getValue().toString();
 
-                            // pindah activity
-                            Intent gotohome = new Intent(SignInAct.this, HomeAct.class);
-                            startActivity(gotohome);
+                            // validasi password dengan password firebase
+                            if (password.equals(passwordFromFirebase)) {
+                                // simpan username (key) pada local
+                                SharedPreferences sharedPreferences = getSharedPreferences(USERNAME_KEY, MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString(username_key, xusername.getText().toString());
+                                editor.apply();
+
+                                // pindah activity
+                                Intent gotohome = new Intent(SignInAct.this, HomeAct.class);
+                                startActivity(gotohome);
+
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Password Salah", Toast.LENGTH_SHORT).show();
+                            }
+
+                            // Toast.makeText(getApplicationContext(), "Username ada!", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getApplicationContext(), "Username tidak ada!", Toast.LENGTH_SHORT).show();
                         }
