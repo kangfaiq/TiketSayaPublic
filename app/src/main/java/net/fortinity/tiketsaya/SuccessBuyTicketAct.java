@@ -12,12 +12,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SuccessBuyTicketAct extends AppCompatActivity {
-
-    Button btn_my_dashboard, btn_view_ticket;
     Animation app_splash, btt, ttb;
+    Button btn_view_ticket, btn_my_dashboard;
     TextView app_title, app_subtitle;
     ImageView icon_success_ticket;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,17 +23,17 @@ public class SuccessBuyTicketAct extends AppCompatActivity {
         setContentView(R.layout.activity_success_buy_ticket);
 
         btn_view_ticket = findViewById(R.id.btn_view_ticket);
+        btn_my_dashboard = findViewById(R.id.btn_my_dashboard);
         app_title = findViewById(R.id.app_title);
         app_subtitle = findViewById(R.id.app_subtitle);
         icon_success_ticket = findViewById(R.id.icon_success_ticket);
-        btn_my_dashboard = findViewById(R.id.btn_my_dashboard);
 
-        // load animation
+        //Load Animation
         app_splash = AnimationUtils.loadAnimation(this, R.anim.app_splash);
         btt = AnimationUtils.loadAnimation(this, R.anim.btt);
         ttb = AnimationUtils.loadAnimation(this, R.anim.ttb);
 
-        // run animation
+        //Run Animation
         icon_success_ticket.startAnimation(app_splash);
 
         app_title.startAnimation(ttb);
@@ -44,12 +42,24 @@ public class SuccessBuyTicketAct extends AppCompatActivity {
         btn_view_ticket.startAnimation(btt);
         btn_my_dashboard.startAnimation(btt);
 
+        //berpindah Activity MyProfile
+        btn_view_ticket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gotoprofile = new Intent(SuccessBuyTicketAct.this, MyProfileAct.class);
+                startActivity(gotoprofile);
+            }
+        });
+
+        //berpindah Activity Home
         btn_my_dashboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent gotodashboard = new Intent(SuccessBuyTicketAct.this, HomeAct.class);
-                startActivity(gotodashboard);
+                Intent gotohome = new Intent(SuccessBuyTicketAct.this, HomeAct.class);
+                startActivity(gotohome);
             }
         });
+
     }
+
 }
